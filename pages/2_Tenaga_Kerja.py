@@ -3,10 +3,6 @@ import streamlit as st
 
 st.title('Tenaga Kerja')
  
-with st.sidebar:
-    option = st.selectbox(
-        'Tahun Data',
-        ("Semua",2021, 2022, 2023))
 
 tab1, tab2, tab3= st.tabs(["Konsep & Definisi", "Data", "Visualisasi"])
 tenaga_kerja = {
@@ -60,6 +56,7 @@ with tab1:
  
 with tab2:
     st.dataframe(data=df, use_container_width=True)
+    st.caption('Sumber: Badan Pusat Statistik (BPS)')
 
 with tab3:
     row1 = st.container()
@@ -72,6 +69,7 @@ with tab3:
         col1.metric("Bukan Angkatan Kerja", df['2023'][3], round(df['2023'][3]-df['2022'][3],2))
         col2.metric("Pengangguran", df['2023'][4], round(df['2023'][4]-df['2022'][4],2))
         col3.metric("Penduduk Bekerja", df['2023'][5], round(df['2023'][5]-df['2022'][5],2))
+        st.caption('Catatan: Dibandingkan dengan tahun 2022')
     
     st.subheader('Tingkat Partisipasi Angkatan Kerja (TPAK)')
     st.bar_chart(df.iloc[0])
