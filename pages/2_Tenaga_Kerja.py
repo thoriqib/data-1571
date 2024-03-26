@@ -2,7 +2,6 @@ import pandas as pd
 import streamlit as st
 
 st.title('Tenaga Kerja')
- 
 
 tab1, tab2, tab3= st.tabs(["Konsep & Definisi", "Data", "Visualisasi"])
 tenaga_kerja = {
@@ -64,10 +63,10 @@ with tab3:
         st.subheader('Kondisi Ketenagakerjaan Kota Jambi 2023')
         col1, col2, col3 = st.columns(3)
         col1.metric("TPAK", df['2023'][0], round(df['2023'][0]-df['2022'][0],2))
-        col2.metric("TPT", df['2023'][1], round(df['2023'][1]-df['2022'][1],2))
+        col2.metric("TPT", df['2023'][1], round(df['2023'][1]-df['2022'][1],2), delta_color="inverse")
         col3.metric("Angkatan Kerja", df['2023'][2], round(df['2023'][2]-df['2022'][2],2))
         col1.metric("Bukan Angkatan Kerja", df['2023'][3], round(df['2023'][3]-df['2022'][3],2))
-        col2.metric("Pengangguran", df['2023'][4], round(df['2023'][4]-df['2022'][4],2))
+        col2.metric("Pengangguran", df['2023'][4], round(df['2023'][4]-df['2022'][4],2), delta_color="inverse")
         col3.metric("Penduduk Bekerja", df['2023'][5], round(df['2023'][5]-df['2022'][5],2))
         st.caption('Catatan: Dibandingkan dengan tahun 2022')
     

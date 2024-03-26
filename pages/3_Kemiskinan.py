@@ -50,8 +50,8 @@ with tab3:
     with row1:
         st.subheader('Indikator Kemiskinan Kota Jambi 2023')
         col1, col2, col3 = st.columns(3)
-        col1.metric("Jumlah Penduduk Miskin", df['2023'][0], round(df['2023'][0]-df['2022'][0],2))
-        col2.metric("Persentase Penduduk Miskin (P0)", df['2023'][1], round(df['2023'][1]-df['2022'][1],2))
+        col1.metric("Jumlah Penduduk Miskin", df['2023'][0], round(df['2023'][0]-df['2022'][0],2), delta_color="inverse")
+        col2.metric("Persentase Penduduk Miskin (P0)", df['2023'][1], round(df['2023'][1]-df['2022'][1],2), delta_color="inverse")
         col3.metric("Indikator Kedalaman Kemiskinan (P1)", df['2023'][2], round(df['2023'][2]-df['2022'][2],2))
         col1.metric("Indikator Keparahan Kemiskinan (P2)", df['2023'][3], round(df['2023'][3]-df['2022'][3],2))
         col2.metric("Garis Kemiskinan", df['2023'][4], round(df['2023'][4]-df['2022'][4],2))
