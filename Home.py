@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.set_page_config(page_title="Data 1571", page_icon=st.image('BPS.png'), layout="centered", initial_sidebar_state="auto", menu_items=None)
+st.set_page_config(page_title="Data 1571", page_icon='BPS.png')
 
 st.title('Selamat Datang Di Dashboard Indikator Strategis Kota Jambi')
  
