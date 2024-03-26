@@ -13,3 +13,5 @@ st.page_link("pages/6_Pertumbuhan_Ekonomi.py", label="Pertumbuhan Ekonomi", icon
 st.page_link("pages/7_Produk_Domestik_Regional_Bruto.py", label="Produk Domestik Regional Bruto", icon="7️⃣")
 st.page_link("pages/8_Pendidikan.py", label="Pendidikan", icon="8️⃣")
 st.page_link("pages/9_Kesehatan.py", label="Kesehatan", icon="9️⃣")
+
+st.set_page_config(page_title="Data 1571", page_icon=st.image('BPS.png'), layout="centered", initial_sidebar_state="auto", menu_items=None)
