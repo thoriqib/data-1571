@@ -12,6 +12,4 @@ st.page_link("pages/4_Indeks_Pembangunan_Manusia.py", label="Indeks Pembangunan 
 st.page_link("pages/5_Inflasi.py", label="Inflasi", icon="5️⃣")
 st.page_link("pages/6_Pertumbuhan_Ekonomi.py", label="Pertumbuhan Ekonomi", icon="6️⃣")
 st.page_link("pages/7_Produk_Domestik_Regional_Bruto.py", label="Produk Domestik Regional Bruto", icon="7️⃣")
-st.page_link("pages/8_Pendidikan.py", label="Pendidikan", icon="8️⃣")
-st.page_link("pages/9_Kesehatan.py", label="Kesehatan", icon="9️⃣")
 

@@ -5,6 +5,20 @@ st.title('Tenaga Kerja')
 
 tab1, tab2, tab3= st.tabs(["Konsep & Definisi", "Data", "Visualisasi"])
 tenaga_kerja = {
+    '2019': {'Tingkat Partisipasi Angkatan Kerja (TPAK)': 63.75, 
+             'Tingkat Pengangguran Terbuka (TPT)': 6.72,
+             'Jumlah Angkatan Kerja': 307022,
+             'Jumlah Penduduk Bukan Angkatan Kerja' : 152340,
+             'Jumlah Pengangguran': 20635,
+             'Jumlah Penduduk Bekerja': 286387
+            },
+    '2020': {'Tingkat Partisipasi Angkatan Kerja (TPAK)': 65.99, 
+             'Tingkat Pengangguran Terbuka (TPT)': 10.49,
+             'Jumlah Angkatan Kerja': 296273,
+             'Jumlah Penduduk Bukan Angkatan Kerja' : 165756,
+             'Jumlah Pengangguran': 31068,
+             'Jumlah Penduduk Bekerja': 265205
+            },
     '2021': {'Tingkat Partisipasi Angkatan Kerja (TPAK)': 63.12, 
              'Tingkat Pengangguran Terbuka (TPT)': 10.66,
              'Jumlah Angkatan Kerja': 294349,
