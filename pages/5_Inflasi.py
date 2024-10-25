@@ -1,909 +1,9 @@
 import pandas as pd
+import requests
 import streamlit as st
 
 st.title('Inflasi')
 
-inflasi = {
-    '2020': { 
-        'Januari': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-        }, 
-        'Februari': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Maret': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'April': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Mei': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Juni': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Juli': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Agustus': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'September': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Oktober': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'November': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Desember': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-        }
-    },
-    '2021': { 
-        'Januari': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Februari': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Maret': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'April': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Mei': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Juni': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Juli': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Agustus': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'September': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Oktober': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'November': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Desember': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-        }},
-    '2022': { 
-       'Januari': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Februari': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Maret': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'April': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Mei': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Juni': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Juli': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Agustus': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'September': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Oktober': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'November': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Desember': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-        }},
-    '2023': { 
-        'Januari': {
-            'Umum': 0.68,
-            'Makanan, Minuman dan Tembakau': 2.31,
-            'Pakaian dan Alas Kaki': 0.06,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': -0.07,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.05,
-            'Kesehatan': 0.08,
-            'Transportasi': -0.26,
-            'Informasi, Komunikasi dan Jasa Keuangan': '-',
-            'Rekreasi, Olahraga dan Budaya': '-',
-            'Pendidikan': 0.84,
-            'Penyediaan Makanan dan Minuman/Restoran': '-',
-            'Perawatan Pribadi dan Jasa Lainnya': 0.43,
-
-        }, 
-        'Februari': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Maret': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'April': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Mei': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Juni': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Juli': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Agustus': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'September': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Oktober': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'November': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Desember': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-        }},
-    '2024': { 
-        'Januari': {
-            'Umum': 0.68,
-            'Makanan, Minuman dan Tembakau': 2.31,
-            'Pakaian dan Alas Kaki': 0.06,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': -0.07,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.05,
-            'Kesehatan': 0.08,
-            'Transportasi': -0.26,
-            'Informasi, Komunikasi dan Jasa Keuangan': '-',
-            'Rekreasi, Olahraga dan Budaya': '-',
-            'Pendidikan': 0.84,
-            'Penyediaan Makanan dan Minuman/Restoran': '-',
-            'Perawatan Pribadi dan Jasa Lainnya': 0.43,
-        }, 
-        'Februari': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Maret': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'April': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Mei': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Juni': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Juli': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Agustus': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'September': {
-            'Umum': 0.40,
-            'Makanan, Minuman dan Tembakau': 0.40,
-            'Pakaian dan Alas Kaki': 0.40,
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': 0.40,
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': 0.40,
-            'Kesehatan': 0.40,
-            'Transportasi': 0.40,
-            'Informasi, Komunikasi dan Jasa Keuangan': 0.40,
-            'Rekreasi, Olahraga dan Budaya': 0.40,
-            'Pendidikan': 0.40,
-            'Penyediaan Makanan dan Minuman/Restoran': 0.40,
-            'Perawatan Pribadi dan Jasa Lainnya': 0.40,
-
-        }, 
-        'Oktober': {
-            'Umum': "-",
-            'Makanan, Minuman dan Tembakau': "-",
-            'Pakaian dan Alas Kaki': "-",
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': "-",
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': "-",
-            'Kesehatan': "-",
-            'Transportasi': "-",
-            'Informasi, Komunikasi dan Jasa Keuangan': "-",
-            'Rekreasi, Olahraga dan Budaya': "-",
-            'Pendidikan': "-",
-            'Penyediaan Makanan dan Minuman/Restoran': "-",
-            'Perawatan Pribadi dan Jasa Lainnya': "-",
-
-        }, 
-        'November': {
-            'Umum': "-",
-            'Makanan, Minuman dan Tembakau': "-",
-            'Pakaian dan Alas Kaki': "-",
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': "-",
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': "-",
-            'Kesehatan': "-",
-            'Transportasi': "-",
-            'Informasi, Komunikasi dan Jasa Keuangan': "-",
-            'Rekreasi, Olahraga dan Budaya': "-",
-            'Pendidikan': "-",
-            'Penyediaan Makanan dan Minuman/Restoran': "-",
-            'Perawatan Pribadi dan Jasa Lainnya': "-",
-
-        }, 
-        'Desember': {
-            'Umum': "-",
-            'Makanan, Minuman dan Tembakau': "-",
-            'Pakaian dan Alas Kaki': "-",
-            'Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga': "-",
-            'Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga': "-",
-            'Kesehatan': "-",
-            'Transportasi': "-",
-            'Informasi, Komunikasi dan Jasa Keuangan': "-",
-            'Rekreasi, Olahraga dan Budaya': "-",
-            'Pendidikan': "-",
-            'Penyediaan Makanan dan Minuman/Restoran': "-",
-            'Perawatan Pribadi dan Jasa Lainnya': "-",
-        }}
-}
 tab1, tab2, tab3= st.tabs(["Konsep & Definisi", "Data", "Visualisasi"])
 
 with tab1:
@@ -920,10 +20,108 @@ with tab1:
     st.markdown('Biasa disebut Inflasi Bulanan, dihitung melalui perbandingan IHK bulan berjalan dibanding dengan IHK bulan sebelumnya.')
 
 with tab2:
+    id_tahun = ''
     option = st.selectbox("Pilih Tahun Data",("2024", "2023", "2022", "2021", "2020"))
-    df = pd.DataFrame(inflasi[option])
-    st.dataframe(data=df, use_container_width=True)
-    st.caption('Sumber: Badan Pusat Statistik (BPS)')
 
-with tab1:
+    match option:
+        case '2024':
+            id_tahun = '124'
+        case '2023':
+            id_tahun = '123'
+        case '2022':
+            id_tahun = '122'
+        case '2021':
+            id_tahun = '121'
+        case '2020':
+            id_tahun = '120'
+
+    st.subheader('Inflasi Bulan ke Bulan (M to M), '+option)
+    with st.expander("Inflasi Bulan ke Bulan (M to M)"):
+        api_url = "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/1571/var/165/key/19cba23ac111b56c7871715f54140d88"
+
+        # Mengambil data dari API
+        response = requests.get(api_url)
+
+        if response.status_code == 200:
+            data = response.json()  # Konversi respons ke format JSON
+        else:
+            st.error(f"Failed to fetch data. Status code: {response.status_code}")
+        vervar = data['vervar']
+        datacontent = data['datacontent']
+        bulan = data['turtahun']
+
+        temp = {}
+        inflasi = {}
+        for i in bulan:
+            temp = {}
+            for j in vervar:
+                try:
+                    temp.update({j['label']: datacontent[str(j['val'])+'1650'+id_tahun+str(i['val'])]}) 
+                except KeyError:
+                    temp.update({j['label']: 0 }) 
+            inflasi.update({i['label']: temp})  
+        df = pd.DataFrame(inflasi)
+        st.dataframe(data=df, use_container_width=True)
+        st.caption('Sumber: Badan Pusat Statistik (BPS)')
+
+    st.subheader('Inflasi Tahun ke Tahun (Y to Y), '+option)
+    with st.expander("Inflasi Tahun ke Tahun (Y to Y)"):
+        api_url1 = "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/1571/var/114/key/19cba23ac111b56c7871715f54140d88"
+
+        # Mengambil data dari API
+        response1 = requests.get(api_url1)
+
+        if response1.status_code == 200:
+            data1 = response1.json()  # Konversi respons ke format JSON
+        else:
+            st.error(f"Failed to fetch data. Status code: {response1.status_code}")
+        vervar = data['vervar']
+        datacontent1 = data1['datacontent']
+        bulan = data['turtahun']
+
+        temp = {}
+        inflasi1 = {}
+        for i in bulan:
+            temp = {}
+            for j in vervar:
+                try:
+                    temp.update({j['label']: datacontent1[str(j['val'])+'1140'+id_tahun+str(i['val'])]}) 
+                except KeyError:
+                    temp.update({j['label']: 0 }) 
+            inflasi1.update({i['label']: temp})  
+        df1 = pd.DataFrame(inflasi1)
+        st.dataframe(data=df1, use_container_width=True)
+        st.caption('Sumber: Badan Pusat Statistik (BPS)')
+
+
+    st.subheader('Inflasi Tahun Kalender (Y to D), '+option)
+    with st.expander("Inflasi Tahun Kalender (Y to D)"):
+        api_url2 = "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/1571/var/164/key/19cba23ac111b56c7871715f54140d88"
+
+        # Mengambil data dari API
+        response2 = requests.get(api_url2)
+
+        if response2.status_code == 200:
+            data2 = response2.json()  # Konversi respons ke format JSON
+        else:
+            st.error(f"Failed to fetch data. Status code: {response2.status_code}")
+        vervar = data['vervar']
+        datacontent2 = data2['datacontent']
+        bulan = data['turtahun']
+
+        temp = {}
+        inflasi1 = {}
+        for i in bulan:
+            temp = {}
+            for j in vervar:
+                try:
+                    temp.update({j['label']: datacontent2[str(j['val'])+'1640'+id_tahun+str(i['val'])]}) 
+                except KeyError:
+                    temp.update({j['label']: 0 }) 
+            inflasi1.update({i['label']: temp})  
+        df1 = pd.DataFrame(inflasi1)
+        st.dataframe(data=df1, use_container_width=True)
+        st.caption('Sumber: Badan Pusat Statistik (BPS)')
+
+with tab3:
     st.subheader('Visualisasi Belum Tersedia')
