@@ -23,18 +23,17 @@ with tab2:
     id_tahun = ''
     option = st.selectbox("Pilih Tahun Data",("2024", "2023", "2022", "2021", "2020"))
 
-    match option:
-        case '2024':
-            id_tahun = '124'
-        case '2023':
-            id_tahun = '123'
-        case '2022':
-            id_tahun = '122'
-        case '2021':
-            id_tahun = '121'
-        case '2020':
-            id_tahun = '120'
-
+    if option == '2024':
+        id_tahun = '124'
+    elif option == '2023':
+        id_tahun = '123'
+    elif option == '2022':
+        id_tahun = '122'
+    elif option == '2021':
+        id_tahun = '121'
+    elif option == '2020':
+        id_tahun = '120'
+        
     st.subheader('Inflasi Bulan ke Bulan (M to M), '+option)
     with st.expander("Inflasi Bulan ke Bulan (M to M)"):
         api_url = "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/1571/var/165/key/19cba23ac111b56c7871715f54140d88"

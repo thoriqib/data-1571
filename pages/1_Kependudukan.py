@@ -18,9 +18,26 @@ with tab1:
     st.subheader('Rasio Jenis Kelamin')
     st.markdown('Perbandingan antara jumlah penduduk')
 
-# with tab2:
-#     st.dataframe(data=df, use_container_width=True)
-#     st.caption('Sumber: Badan Pusat Statistik (BPS)')
+with tab2:
+    # st.dataframe(data=df, use_container_width=True)
+    option = st.selectbox("Pilih Tahun Data",("2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017"))
+    url = "https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/25/tahun/"+option+"/id_tabel/WVRlTTcySlZDa3lUcFp6czNwbHl4QT09/wilayah/1571000/key/19cba23ac111b56c7871715f54140d88"
+    df = pd.read_json(url)
+    if df['data'][1]['status'] == 200:
+        pddk = {}
+        for i in df['data'][1]['kolom']: 
+            temp = {}
+            for j in df['data'][1]['data']:
+                temp[j['label']] = j['variables'][i]['value']
+            if i == "nzudy5elv7":
+                pddk[df['data'][1]['kolom'][i]['nama_variabel']+' (ribu jiwa)'] = temp   
+            else: pddk[df['data'][1]['kolom'][i]['nama_variabel']] = temp   
+        pddk = pd.DataFrame(pddk)
+        st.subheader('Data Kependudukan Tahun ' + option + ' Kota Jambi')
+        st.dataframe(data=pddk, use_container_width=True)
+    else : st.subheader('Data ' + option + ' Belum Tersedia')
+    
+    st.caption('Sumber: Badan Pusat Statistik (BPS)')
  
 # with tab3:
 #     row1 = st.container()
